@@ -1,0 +1,1 @@
+Remember to localize namespace schemaLocation url.

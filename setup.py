@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-import sys, os
+import os
 from setuptools import setup, find_packages
+
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -22,16 +23,11 @@ setup(name='vectorformats',
       author='FeatureServer (iocast)',
       author_email='featureserver@live.com',
       url='http://featureserver.org/vectorformats.html',
-      
-      packages=['vectorformats',
-                'vectorformats.formats',
-                'vectorformats.lib'],
-      
       install_requires=['dxfwrite>=1.2.0',
                         'pyspatialite>=3.0.1'],
-
-      
+      packages=find_packages(),
+      include_package_data=True,
       zip_safe=False,
       license="MIT",
       classifiers=classifiers
-      )
+)

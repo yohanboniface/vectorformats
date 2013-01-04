@@ -54,6 +54,14 @@ class KMLDecodeTest(unittest.TestCase):
         self.assertEqual(polygon.geometry['type'], 'Polygon')
         self.assertEqual(polygon.geometry['coordinates'], [[[-77.05788457660967, 38.87253259892824, 100.0], [-77.05465973756702, 38.87291016281703, 100.0], [-77.0531553685479, 38.87053267794386, 100.0], [-77.05552622493516, 38.868757801256, 100.0]]])
 
+    def test_not_wellformed_xml(self):
+        with self.assertRaises(Exception):
+            self.decode("not_wellformed.kml")
+
+    def test_invalid_schema(self):
+        with self.assertRaises(Exception):
+            self.decode("invalid_schema.kml")
+
 
 if __name__ == '__main__':
     unittest.main()

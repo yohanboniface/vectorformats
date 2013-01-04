@@ -1,7 +1,10 @@
+import re
+import os
+
+from ..validators import VALIDATOR_ROOT
+from ..validators.xml import schema, wellformed
 from ..feature import Feature
 from .format import Format
-
-import re
 
 
 class KML(Format):
@@ -115,17 +118,18 @@ class KML(Format):
             raise Exception("Could not convert geometry of type %s." % geometry['type'])
 
     def decode(self, data):
-            import xml.dom.minidom as m
-            actions = []
+        self.validate(data)
+        import xml.dom.minidom as m
+        actions = []
 
-            doc = m.parseString(data)
-            entries = doc.getElementsByTagName("Placemark")
-            entries.reverse()
-            for entry in entries:
-                feature_obj = self.entry_to_feature(entry)
-                actions.append(feature_obj)
+        doc = m.parseString(data)
+        entries = doc.getElementsByTagName("Placemark")
+        entries.reverse()
+        for entry in entries:
+            feature_obj = self.entry_to_feature(entry)
+            actions.append(feature_obj)
 
-            return actions
+        return actions
 
     def split_coordinates(self, string):
         """
@@ -184,3 +188,13 @@ class KML(Format):
                 pass
 
         return feature
+
+    def validate(self, data):
+        xsd_path = os.path.join(
+            VALIDATOR_ROOT,
+            "xml",
+            "ref",
+            'ogckml22.xsd'
+        )
+        wellformed(data)
+        schema(data, xsd_path)
