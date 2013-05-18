@@ -6,7 +6,7 @@ Created on May 18, 2011
 
 import StringIO
 
-import vectorformats.lib.shapefile as shapefile 
+import shapefile
 
 from .format import Format
 
@@ -42,7 +42,7 @@ class SHP(Format):
             organization = srs[:srs.find(":")]
             number = srs[srs.find(":")+1:]
             
-            file = open("resources/projections/" + str(organization).lower() + "/" + str(number) + ".prj")
+            file = open("assets/projections/" + str(organization).lower() + "/" + str(number) + ".prj")
             prjBuffer.write(file.read())
         
         return (shpBuffer, shxBuffer, dbfBuffer, prjBuffer)

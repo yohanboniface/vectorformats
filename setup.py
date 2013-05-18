@@ -19,12 +19,23 @@ setup(name='vectorformats',
       version='0.2',
       description='geographic data serialization/deserialization library',
       long_description=read('doc/Readme.txt'),
-      author='FeatureServer (iocast)',
-      author_email='featureserver@live.com',
+      author='VectorFormats (iocast)',
+      author_email='vectorformats@live.com',
       url='http://featureserver.org/vectorformats.html',
-      packages=['vectorformats',
-                'vectorformats.formats',
-                'vectorformats.lib'],
+      
+      #packages=['vectorformats',
+      #          'vectorformats.formats',
+      #          'vectorformats.lib'],
+      packages=find_packages(exclude=["doc", "tests"]),
+      
+      install_requires=['dxfwrite>=1.2.0',
+                        'simplejson>=2.6.2',
+                        'pyspatialite>=3.0.1',
+                        'pyshp>=1.1.4',
+                        'Cheetah>=2.4.4'],
+
+      test_suite = 'tests.test_suite',
+      
       zip_safe=False,
       license="MIT",
       classifiers=classifiers
