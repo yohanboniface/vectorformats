@@ -30,7 +30,6 @@ setup(name='vectorformats',
       
       install_requires=['dxfwrite>=1.2.0',
                         'simplejson>=2.6.2',
-                        'pyspatialite==2.6.2-spatialite.2.4.0-4',
                         'pyshp>=1.1.4',
                         'Cheetah>=2.4.4'],
 
